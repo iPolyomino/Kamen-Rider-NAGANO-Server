@@ -26,9 +26,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                items:
-                  $ref: "#/components/schemas/Room"
+                $ref: "#/components/schemas/Room"
     post:
       summary: update room information
       responses:
@@ -37,9 +35,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                items:
-                  $ref: "#/components/schemas/Room"
+                $ref: "#/components/schemas/Room"
   "/room/{id}/comment":
     parameters:
       - name: id
@@ -50,15 +46,19 @@ paths:
           format: int64
     post:
       summary: create new post
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Comment"
       responses:
         "201":
           description: add comment
           content:
             application/json:
               schema:
-                type: object
-                items:
-                  $ref: "#/components/schemas/Comment"
+                $ref: "#/components/schemas/Comment"
   "/room/new":
     post:
       summary: create new room
@@ -68,26 +68,20 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              items:
-                $ref: "#/components/schemas/NewRoom"
+              $ref: "#/components/schemas/NewRoom"
       responses:
         "201":
           description: room creating succeeded
           content:
             application/json:
               schema:
-                type: object
-                items:
-                  $ref: "#/components/schemas/Room"
+                $ref: "#/components/schemas/Room"
         "400":
           description: room creating error
           content:
             application/json:
               schema:
-                type: object
-                items:
-                  $ref: "#/components/schemas/Error"
+                $ref: "#/components/schemas/Error"
 components:
   schemas:
     Comment:
