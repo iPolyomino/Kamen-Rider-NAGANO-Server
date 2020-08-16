@@ -1,2 +1,5 @@
 # editor setting
 .idea/
+
+# config files
+*.mwb.bak
