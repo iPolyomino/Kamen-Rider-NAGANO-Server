@@ -1,0 +1,19 @@
+version: "3.7"
+
+services:
+  imageboard:
+    image: imageboard-server
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    ports:
+      - 8080:8080
+    env_file: [.env]
+    container_name: imageboard-server
+    networks:
+      - services
+
+networks:
+  services:
+    external:
+      name: db_imageboard_network

@@ -3,3 +3,5 @@
 
 # config files
 *.mwb.bak
+
+vendor
