@@ -2,7 +2,6 @@ package mysql
 
 import (
 	"fmt"
-	"log"
 
 	"github.com/iPolyomino/Kamen-Rider-NAGANO-Server/internal/mysql/model"
 	"github.com/jinzhu/gorm"
@@ -39,7 +38,6 @@ func (d *DefaultRoom) Find(tx *gorm.DB, roomID int) (*model.Room, error) {
 		if err != nil {
 			return nil, err
 		}
-		log.Println(comment.ID)
 		m.Comments = append(m.Comments, comment)
 	}
 

@@ -14,7 +14,7 @@ import (
 
 func NewRoomRows(ms ...model.Room) *sqlmock.Rows {
 	rows := sqlmock.NewRows([]string{
-		"room.id",
+		"id",
 		"name",
 		"comment.id",
 		"sender",
