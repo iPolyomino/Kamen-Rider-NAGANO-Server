@@ -6,3 +6,15 @@ API仕様は[こちら](./api/swagger-spec/swagger.yaml)を参照してくださ
 - Go 1.14.4
 - MySQL 8.0.20
 - Docker 19.03.8
+
+## 使い方
+
+### 起動
+```sh
+> make up
+```
+
+### 停止
+```sh
+> make down
+```
