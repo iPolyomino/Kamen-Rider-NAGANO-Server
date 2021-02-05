@@ -1,0 +1,130 @@
+openapi: 3.0.0
+servers:
+  - description: imageboard api server
+    url: https://imageboard.polyomino.jp
+info:
+  description: bulletin board api
+  version: "1.0.0"
+  title: bulletin board api
+  license:
+    name: MIT License
+    url: "https://github.com/iPolyomino/Kamen-Rider-NAGANO-Server/blob/master/LICENSE"
+paths:
+  "/room/{id}":
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+    get:
+      summary: get room
+      responses:
+        "200":
+          description: get room
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Room"
+    post:
+      summary: update room information
+      responses:
+        "202":
+          description: update room information
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Room"
+  "/room/{id}/comment":
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+    post:
+      summary: create new post
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Comment"
+      responses:
+        "201":
+          description: add comment
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Comment"
+  "/room/new":
+    post:
+      summary: create new room
+      description: new room API
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/NewRoom"
+      responses:
+        "201":
+          description: room creating succeeded
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Room"
+        "400":
+          description: room creating error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+components:
+  schemas:
+    Comment:
+      type: object
+      required:
+        - sender
+        - text
+      properties:
+        sender:
+          type: string
+        text:
+          type: string
+        image_url:
+          type: string
+    Room:
+      type: object
+      required:
+        - id
+        - name
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        comments:
+          type: array
+          items:
+            $ref: "#/components/schemas/Comment"
+    NewRoom:
+      type: object
+      properties:
+        name:
+          type: string
+          example: "Kamen Rider"
+    Error:
+      type: object
+      required:
+        - code
+        - message
+      properties:
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string
